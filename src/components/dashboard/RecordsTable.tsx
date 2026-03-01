@@ -52,7 +52,7 @@ const RecordsTable = () => {
                     <tr key={call.id} className="border-b border-border/50 hover:bg-secondary/30 transition-colors">
                       <td className="p-3 font-mono">{call.phone_number}</td>
                       <td className="p-3 font-mono hidden sm:table-cell">{call.duration || "—"}</td>
-                      <td className="p-3">{riskBadge(call.status === "flagged" ? "high" : null)}</td>
+                      <td className="p-3">{call.status === "flagged" ? riskBadge("high") : <span className="text-[10px] text-muted-foreground font-mono">CLEAN</span>}</td>
                       <td className="p-3 max-w-[200px] truncate text-muted-foreground hidden lg:table-cell">{call.transcript || "—"}</td>
                     </tr>
                   ))}
@@ -82,7 +82,7 @@ const RecordsTable = () => {
                   {smsRecords?.map((sms) => (
                     <tr key={sms.id} className="border-b border-border/50 hover:bg-secondary/30 transition-colors">
                       <td className="p-3 font-mono">{sms.phone_number}</td>
-                      <td className="p-3">{riskBadge(sms.status === "flagged" ? "high" : null)}</td>
+                      <td className="p-3">{sms.status === "flagged" ? riskBadge("high") : <span className="text-[10px] text-muted-foreground font-mono">CLEAN</span>}</td>
                       <td className="p-3 max-w-[300px] truncate text-muted-foreground">{sms.message}</td>
                     </tr>
                   ))}
