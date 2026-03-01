@@ -1,6 +1,5 @@
 import { type DbAlert, useAlerts } from "@/hooks/useAlerts";
 import { Phone, MessageSquare, MapPin, Clock, Shield, Building2, CheckCircle } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -13,10 +12,11 @@ const AlertDetail = ({ alert }: AlertDetailProps) => {
 
   if (!alert) {
     return (
-      <div className="glass-panel rounded-lg h-full flex items-center justify-center">
-        <div className="text-center text-muted-foreground">
-          <Shield className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 opacity-20" />
-          <p className="text-xs md:text-sm">Select an alert to view details</p>
+      <div className="glass-panel rounded-xl h-full flex items-center justify-center">
+        <div className="text-center text-muted-foreground p-8">
+          <Shield className="w-16 h-16 mx-auto mb-4 opacity-15" />
+          <p className="text-base font-medium mb-1">No Alert Selected</p>
+          <p className="text-sm opacity-70">Click an alert from the list to view its details and AI analysis</p>
         </div>
       </div>
     );
@@ -33,76 +33,67 @@ const AlertDetail = ({ alert }: AlertDetailProps) => {
     <AnimatePresence mode="wait">
       <motion.div
         key={alert.id}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        className="glass-panel rounded-lg h-full overflow-auto p-3 md:p-4 space-y-3 md:space-y-4"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -20 }}
+        className="glass-panel rounded-xl h-full overflow-auto p-5 md:p-6 space-y-5"
       >
+        {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <p className="font-mono text-[10px] md:text-xs text-muted-foreground mb-1">{alert.alert_code}</p>
-            <h2 className="text-lg md:text-xl font-bold">{alert.crime_type}</h2>
+            <p className="font-mono text-xs text-muted-foreground mb-2">{alert.alert_code}</p>
+            <h2 className="text-2xl font-bold tracking-tight">{alert.crime_type}</h2>
           </div>
           <div className={`text-right ${riskColor[alert.risk_level]}`}>
-            <p className="text-xl md:text-2xl font-black font-mono uppercase">{alert.risk_level}</p>
-            <p className="text-[9px] md:text-[10px] uppercase tracking-widest">Risk Level</p>
+            <p className="text-3xl font-black font-mono uppercase leading-none">{alert.risk_level}</p>
+            <p className="text-[10px] uppercase tracking-widest mt-1 opacity-70">Risk Level</p>
           </div>
         </div>
 
-        <div className="bg-secondary/50 rounded-md p-3">
-          <p className="text-[10px] md:text-xs uppercase tracking-wider text-muted-foreground mb-1">AI Analysis</p>
-          <p className="text-xs md:text-sm leading-relaxed">{alert.ai_analysis || alert.summary}</p>
+        {/* AI Analysis */}
+        <div className="bg-secondary/30 rounded-xl p-4 md:p-5 border border-border/50">
+          <p className="text-[10px] uppercase tracking-widest text-primary font-semibold mb-2">🤖 AI Analysis</p>
+          <p className="text-sm leading-relaxed text-foreground/90">{alert.ai_analysis || alert.summary}</p>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 md:gap-3 text-sm">
-          <div className="flex items-center gap-2">
-            {alert.source === "call" ? <Phone className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" /> : <MessageSquare className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />}
-            <div>
-              <p className="text-[9px] md:text-[10px] text-muted-foreground uppercase">Source</p>
-              <p className="font-mono text-[11px] md:text-xs">{alert.source === "call" ? "Phone Call" : "SMS"}</p>
+        {/* Meta grid */}
+        <div className="grid grid-cols-2 gap-4 text-sm">
+          {[
+            { icon: alert.source === "call" ? Phone : MessageSquare, label: "Source", value: alert.source === "call" ? "Phone Call" : "SMS" },
+            { icon: Clock, label: "Time", value: new Date(alert.created_at).toLocaleString() },
+            { icon: MapPin, label: "Location", value: alert.location_address },
+            { icon: Building2, label: "Phone", value: alert.phone_number },
+          ].map(({ icon: Icon, label, value }) => (
+            <div key={label} className="flex items-start gap-3 p-3 rounded-lg bg-secondary/20">
+              <Icon className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="text-[10px] text-muted-foreground uppercase tracking-wider">{label}</p>
+                <p className="font-mono text-xs mt-0.5">{value}</p>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Clock className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
-            <div>
-              <p className="text-[9px] md:text-[10px] text-muted-foreground uppercase">Time</p>
-              <p className="font-mono text-[11px] md:text-xs">{new Date(alert.created_at).toLocaleTimeString()}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
-            <div>
-              <p className="text-[9px] md:text-[10px] text-muted-foreground uppercase">Location</p>
-              <p className="text-[11px] md:text-xs">{alert.location_address}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Building2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
-            <div>
-              <p className="text-[9px] md:text-[10px] text-muted-foreground uppercase">Phone</p>
-              <p className="font-mono text-[11px] md:text-xs">{alert.phone_number}</p>
-            </div>
-          </div>
+          ))}
         </div>
 
+        {/* Actions */}
         {alert.status !== "resolved" && (
-          <div className="flex gap-2">
+          <div className="flex gap-3 pt-2">
             {alert.status === "active" && (
-              <Button size="sm" variant="secondary" className="text-xs flex-1"
+              <Button size="lg" variant="secondary" className="flex-1"
                 onClick={() => updateAlertStatus(alert.id, "acknowledged")}>
                 Acknowledge
               </Button>
             )}
-            <Button size="sm" className="text-xs flex-1 gap-1"
+            <Button size="lg" className="flex-1 gap-2"
               onClick={() => updateAlertStatus(alert.id, "resolved")}>
-              <CheckCircle className="w-3 h-3" /> Resolve
+              <CheckCircle className="w-4 h-4" /> Mark Resolved
             </Button>
           </div>
         )}
 
-        <div className="flex items-center gap-2 font-mono text-[10px] md:text-xs text-muted-foreground">
-          <span>Coords: {alert.lat.toFixed(4)}, {alert.lng.toFixed(4)}</span>
-        </div>
+        {/* Coordinates */}
+        <p className="font-mono text-[11px] text-muted-foreground pt-2 border-t border-border/30">
+          Coordinates: {alert.lat.toFixed(4)}, {alert.lng.toFixed(4)}
+        </p>
       </motion.div>
     </AnimatePresence>
   );
