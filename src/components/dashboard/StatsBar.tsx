@@ -1,4 +1,4 @@
-import { Phone, MessageSquare, AlertTriangle, Shield, Users, CheckCircle } from "lucide-react";
+import { Phone, MessageSquare, AlertTriangle, Shield, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAlerts, useCallRecords, useSmsRecords } from "@/hooks/useAlerts";
 
@@ -13,28 +13,30 @@ const StatsBar = () => {
 
   const statItems = [
     { label: "Active Alerts", value: activeAlerts, icon: AlertTriangle, urgent: activeAlerts > 0 },
-    { label: "Threats Detected", value: threatsDetected, icon: Shield, urgent: false },
-    { label: "Calls Monitored", value: calls.length, icon: Phone, urgent: false },
-    { label: "SMS Tracked", value: sms.length, icon: MessageSquare, urgent: false },
-    { label: "Resolved", value: resolvedToday, icon: CheckCircle, urgent: false },
+    { label: "Threats Detected", value: threatsDetected, icon: Shield },
+    { label: "Calls Monitored", value: calls.length, icon: Phone },
+    { label: "SMS Tracked", value: sms.length, icon: MessageSquare },
+    { label: "Resolved", value: resolvedToday, icon: CheckCircle },
   ];
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-3">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
       {statItems.map((item, i) => (
         <motion.div
           key={item.label}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: i * 0.05 }}
-          className={`glass-panel rounded-lg p-2 md:p-3 flex items-center gap-2 md:gap-3 ${item.urgent ? "glow-danger border-risk-high" : ""}`}
+          transition={{ delay: i * 0.06 }}
+          className={`glass-panel rounded-xl p-4 md:p-5 flex items-center gap-3 ${
+            item.urgent ? "glow-danger border-risk-high" : ""
+          }`}
         >
-          <div className={`p-1.5 md:p-2 rounded-md ${item.urgent ? "bg-risk-high/20" : "bg-primary/10"}`}>
-            <item.icon className={`w-3.5 h-3.5 md:w-4 md:h-4 ${item.urgent ? "text-risk-high" : "text-primary"}`} />
+          <div className={`p-2.5 rounded-lg ${item.urgent ? "bg-risk-high/20" : "bg-primary/10"}`}>
+            <item.icon className={`w-5 h-5 ${item.urgent ? "text-risk-high" : "text-primary"}`} />
           </div>
           <div>
-            <p className="text-base md:text-lg font-bold font-mono leading-none">{item.value}</p>
-            <p className="text-[10px] md:text-[11px] text-muted-foreground uppercase tracking-wider">{item.label}</p>
+            <p className="text-xl md:text-2xl font-bold font-mono leading-none">{item.value}</p>
+            <p className="text-[11px] text-muted-foreground uppercase tracking-wider mt-1">{item.label}</p>
           </div>
         </motion.div>
       ))}
