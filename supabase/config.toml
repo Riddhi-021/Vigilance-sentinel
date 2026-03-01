@@ -1,1 +1,4 @@
 project_id = "ninynjrkouqprrwyixpc"
+
+[functions.vigibot-chat]
+verify_jwt = false
