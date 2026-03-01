@@ -9,10 +9,12 @@ import RecordsTable from "@/components/dashboard/RecordsTable";
 import AIChatPanel from "@/components/dashboard/AIChatPanel";
 import ThreatChart from "@/components/dashboard/ThreatChart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Map, List, BarChart3, MessageSquare } from "lucide-react";
 
 const Index = () => {
   const [selectedAlert, setSelectedAlert] = useState<DbAlert | null>(null);
+  const [chatOpen, setChatOpen] = useState(false);
 
   return (
     <div className="h-screen flex flex-col overflow-hidden scanline">
@@ -33,7 +35,7 @@ const Index = () => {
               <TabsTrigger value="records" className="text-xs gap-1 data-[state=active]:bg-primary/20 data-[state=active]:text-primary">
                 <BarChart3 className="w-3 h-3" /> Data
               </TabsTrigger>
-              <TabsTrigger value="chat" className="text-xs gap-1 data-[state=active]:bg-primary/20 data-[state=active]:text-primary">
+              <TabsTrigger value="chat" className="text-xs gap-1 data-[state=active]:bg-primary/20 data-[state=active]:text-primary" onClick={() => setChatOpen(true)}>
                 <MessageSquare className="w-3 h-3" /> AI
               </TabsTrigger>
             </TabsList>
@@ -58,9 +60,6 @@ const Index = () => {
                 <RecordsTable />
               </div>
             </TabsContent>
-            <TabsContent value="chat" className="flex-1 mt-2">
-              <AIChatPanel />
-            </TabsContent>
           </Tabs>
         </div>
 
@@ -84,11 +83,23 @@ const Index = () => {
             <div className="h-[160px]">
               <ThreatChart />
             </div>
-            <div className="h-[280px]">
-              <AIChatPanel />
-            </div>
+            <button
+              onClick={() => setChatOpen(true)}
+              className="glass-panel rounded-lg p-3 flex items-center gap-2 hover:bg-primary/10 transition-colors"
+            >
+              <MessageSquare className="w-4 h-4 text-primary" />
+              <span className="text-xs font-semibold uppercase tracking-wider">Open Vigilance AI Chat</span>
+            </button>
           </div>
         </div>
+
+        {/* AI Chat Dialog */}
+        <Dialog open={chatOpen} onOpenChange={setChatOpen}>
+          <DialogContent className="max-w-lg h-[500px] p-0 gap-0 bg-background border-border">
+            <DialogTitle className="sr-only">Vigilance AI Chat</DialogTitle>
+            <AIChatPanel />
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
