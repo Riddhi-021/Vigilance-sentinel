@@ -22,7 +22,7 @@ const Header = () => {
           <Shield className="w-5 h-5 text-primary" />
         </motion.div>
         <div>
-          <h1 className="font-bold text-base md:text-lg tracking-tight leading-none">VigiBot Sentinel</h1>
+         <h1 className="font-bold text-base md:text-lg tracking-tight leading-none">Vigilance</h1>
           <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] hidden sm:block">AI Crime Intelligence Platform</p>
         </div>
       </div>

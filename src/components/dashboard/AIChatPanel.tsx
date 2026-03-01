@@ -14,7 +14,7 @@ const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/vigibot-chat
 
 const AIChatPanel = () => {
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "VigiBot Agent online. I'm ready to assist with crime analysis, threat assessment, and investigation support. What do you need?" },
+    { role: "assistant", content: "Vigilance Agent online. I'm ready to assist with crime analysis, threat assessment, and investigation support. What do you need?" },
   ]);
   const [input, setInput] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);
@@ -96,7 +96,7 @@ const AIChatPanel = () => {
         }
       }
     } catch (e: any) {
-      toast({ title: "VigiBot Error", description: e.message, variant: "destructive" });
+      toast({ title: "Vigilance Error", description: e.message, variant: "destructive" });
       setMessages((prev) => [...prev, { role: "assistant", content: "⚠️ Error connecting to AI service. Please try again." }]);
     } finally {
       setIsStreaming(false);
@@ -108,7 +108,7 @@ const AIChatPanel = () => {
       <div className="p-3 border-b border-border flex items-center gap-2">
         <div className="w-2 h-2 rounded-full bg-risk-low animate-pulse" />
         <Bot className="w-4 h-4 text-primary" />
-        <h2 className="font-semibold text-xs uppercase tracking-wider">VigiBot AI</h2>
+        <h2 className="font-semibold text-xs uppercase tracking-wider">Vigilance AI</h2>
       </div>
 
       <ScrollArea className="flex-1 p-3" ref={scrollRef}>
@@ -160,7 +160,7 @@ const AIChatPanel = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
-            placeholder="Ask VigiBot..."
+            placeholder="Ask Vigilance..."
             disabled={isStreaming}
             className="flex-1 bg-secondary/50 border border-border rounded-md px-3 py-2 text-xs placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50"
           />
