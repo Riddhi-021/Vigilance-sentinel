@@ -6,7 +6,7 @@
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [Features](#-features)
 - [Architecture](#-architecture)
@@ -25,30 +25,30 @@
 
 ## ✨ Features
 
-### 🗺️ Interactive Crime Map
+### Interactive Crime Map
 - Real-time geospatial visualization of crime alerts across Delhi NCR using **Leaflet**
 - Color-coded markers by risk level (Critical, High, Medium, Low)
 - Click-to-inspect alert details with location, crime type, and AI analysis
 
-### 🚨 Live Alert Management
+### Live Alert Management
 - Real-time alert feed powered by **Supabase Realtime** subscriptions
 - Alert cards with risk-level badges, crime type classification, and status tracking
 - Detailed alert view with AI-generated analysis, assigned officer/station info
 - Status workflow: `active` → `investigating` → `resolved` → `closed`
 
-### 📊 Interactive Statistics Dashboard
+### Interactive Statistics Dashboard
 - **Threats Today** — Clickable popover showing breakdown by crime type
 - **Calls Monitored** — Summary of total vs. flagged calls with recent flagged snippets
 - **SMS Monitored** — Total vs. flagged SMS with suspicious message previews
 - **Active/Resolved Alerts** — Quick-access list of the 5 most recent alerts
 
-### 📞 Records Table
+### Records Table
 - Tabbed view for **Call Records** and **SMS Records**
 - Columns: Phone number, caller/sender name, status, location, timestamp
 - Risk badges for flagged records; clean status labels for safe records
 - Transcript/message preview for quick scanning
 
-### 🤖 Vigilance AI Chat (VigiBot)
+### Vigilance AI Chat (VigiBot)
 - AI-powered crime intelligence assistant accessible via a **medium dialog popup**
 - Powered by **Google Gemini 3 Flash** via edge function with streaming responses
 - Capabilities:
@@ -59,25 +59,25 @@
   - Resource deployment and patrol route suggestions
 - Markdown-rendered responses with real-time streaming
 
-### 🔐 Authentication & Security
+### Authentication & Security
 - Email/password authentication via Supabase Auth
 - Protected routes with automatic redirect to login
 - Officer profiles with badge number, rank, and station assignment
 - Auto-profile creation on signup via database trigger
 - Row-Level Security (RLS) on all tables
 
-### 📱 Responsive Design
+### Responsive Design
 - **Desktop**: Full grid layout with map, alerts, stats, records, and AI chat button
 - **Mobile**: Tabbed bottom navigation (`Map`, `Alerts`, `Data`, `AI`) for optimal mobile UX
 - Dark theme optimized for operational environments
 
-### 📈 Threat Distribution Chart
+### Threat Distribution Chart
 - Visual breakdown of crime types using **Recharts** bar/pie charts
 - Dynamic data from live alert feed
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -195,7 +195,7 @@
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 vigilance/
@@ -244,7 +244,7 @@ vigilance/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -287,7 +287,7 @@ npm run test:watch    # Watch mode
 
 ---
 
-## 🔑 Environment Variables
+##  Environment Variables
 
 Create a `.env` file in the project root:
 
@@ -305,7 +305,7 @@ For the AI chat edge function, configure these secrets in your Supabase project:
 
 ---
 
-## ⚡ Edge Functions
+## Edge Functions
 
 ### `vigibot-chat`
 
@@ -318,7 +318,7 @@ AI-powered crime intelligence chatbot using Google Gemini 3 Flash.
 
 ---
 
-## 🔐 Authentication
+##  Authentication
 
 Vigilance uses **Supabase Auth** with email/password authentication:
 
@@ -330,7 +330,7 @@ Vigilance uses **Supabase Auth** with email/password authentication:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/new-feature`)
@@ -340,7 +340,7 @@ Vigilance uses **Supabase Auth** with email/password authentication:
 
 ---
 
-## 📄 License
+##  License
 
 This project is proprietary software developed for law enforcement use. All rights reserved.
 
