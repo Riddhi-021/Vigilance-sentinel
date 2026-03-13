@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Bot, Send, User, Loader2 } from "lucide-react";
-import { ScrollArea } from "@/components/ui/scroll-area";
+
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import { useToast } from "@/hooks/use-toast";
@@ -18,11 +18,16 @@ const AIChatPanel = () => {
   ]);
   const [input, setInput] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    requestAnimationFrame(() => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
+      }
+    });
   }, [messages]);
 
   const handleSend = async () => {
@@ -102,14 +107,14 @@ const AIChatPanel = () => {
   };
 
   return (
-    <div className="glass-panel rounded-lg h-full flex flex-col">
+    <div className="glass-panel rounded-lg h-full flex flex-col overflow-hidden">
       <div className="p-3 border-b border-border flex items-center gap-2">
         <div className="w-2 h-2 rounded-full bg-risk-low animate-pulse" />
         <Bot className="w-4 h-4 text-primary" />
         <h2 className="font-semibold text-xs uppercase tracking-wider">Vigilance AI</h2>
       </div>
 
-      <ScrollArea className="flex-1 p-3">
+      <div ref={scrollContainerRef} className="flex-1 min-h-0 p-3 overflow-y-auto">
         <div className="space-y-3">
           {messages.map((msg, i) => (
             <motion.div
@@ -151,7 +156,7 @@ const AIChatPanel = () => {
           )}
           <div ref={bottomRef} />
         </div>
-      </ScrollArea>
+      </div>
 
       <div className="p-3 border-t border-border">
         <div className="flex gap-2">
