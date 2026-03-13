@@ -114,7 +114,7 @@ const AIChatPanel = () => {
         <h2 className="font-semibold text-xs uppercase tracking-wider">Vigilance AI</h2>
       </div>
 
-      <div ref={scrollContainerRef} className="flex-1 p-3 overflow-y-auto">
+      <div ref={scrollContainerRef} className="flex-1 min-h-0 p-3 overflow-y-auto">
         <div className="space-y-3">
           {messages.map((msg, i) => (
             <motion.div
