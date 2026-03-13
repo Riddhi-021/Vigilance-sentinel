@@ -18,13 +18,11 @@ const AIChatPanel = () => {
   ]);
   const [input, setInput] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   const handleSend = async () => {
