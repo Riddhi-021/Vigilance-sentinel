@@ -107,7 +107,7 @@ const AIChatPanel = () => {
   };
 
   return (
-    <div className="glass-panel rounded-lg h-full flex flex-col">
+    <div className="glass-panel rounded-lg h-full flex flex-col overflow-hidden">
       <div className="p-3 border-b border-border flex items-center gap-2">
         <div className="w-2 h-2 rounded-full bg-risk-low animate-pulse" />
         <Bot className="w-4 h-4 text-primary" />
