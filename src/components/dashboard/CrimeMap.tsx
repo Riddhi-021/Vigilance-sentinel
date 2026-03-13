@@ -29,7 +29,7 @@ const stationIcon = new L.DivIcon({
 function FlyToAlert({ alert }: { alert: DbAlert | null }) {
   const map = useMap();
   useEffect(() => {
-    if (alert) {
+    if (alert && isFinite(alert.lat) && isFinite(alert.lng)) {
       map.flyTo([alert.lat, alert.lng], 14, { duration: 0.8 });
     }
   }, [alert, map]);
