@@ -149,7 +149,7 @@ const AIChatPanel = () => {
               </div>
             </div>
           )}
-        </div>
+          <div ref={bottomRef} />
       </ScrollArea>
 
       <div className="p-3 border-t border-border">
