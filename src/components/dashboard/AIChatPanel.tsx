@@ -109,7 +109,7 @@ const AIChatPanel = () => {
         <h2 className="font-semibold text-xs uppercase tracking-wider">Vigilance AI</h2>
       </div>
 
-      <ScrollArea className="flex-1 p-3" ref={scrollRef}>
+      <ScrollArea className="flex-1 p-3">
         <div className="space-y-3">
           {messages.map((msg, i) => (
             <motion.div
