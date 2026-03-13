@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Bot, Send, User, Loader2 } from "lucide-react";
-import { ScrollArea } from "@/components/ui/scroll-area";
+
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import { useToast } from "@/hooks/use-toast";
